@@ -1,0 +1,86 @@
+<!--
+  Generated template for the CartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>cart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="isUserLogin">
+        <!--显示购物车列表或者提示购物的按钮-->
+        <div *ngIf="cartList.length == 0">
+            <img src="assets/img/404/404_img2.png"/>
+            <h3>您购物车是空的</h3>
+            <button (click)="jumpToIndex()"
+            ion-button block color="secondary">
+              买买买
+            </button>
+        </div>
+        
+        <ion-list *ngIf="cartList.length > 0">
+          <ion-item-sliding *ngFor="let item of cartList;let myIndex=index">
+            <ion-item >
+              <ion-checkbox item-start></ion-checkbox>
+              <ion-thumbnail item-end>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col align-self-center>
+                        <img [src]="'assets/'+item.pic" alt="">
+                      </ion-col>
+                      <ion-col>
+                        <p>{{item.title}}</p>
+                        <p style="color:red">{{item.price}}</p>
+                        <button (click)="modifyCount(true,myIndex)" style="display:inline-block" ion-button clear small>
+                          <ion-icon name="remove"></ion-icon>
+                        </button>
+                        <span>{{item.count}}</span>
+                        <button (click)="modifyCount(false,myIndex)" style="display:inline-block" ion-button  clear small>
+                          <ion-icon name="add"></ion-icon>
+                        </button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+              </ion-thumbnail>
+              
+            </ion-item>
+            <ion-item-options side="left">
+              <button (click)="deleteFromCart(myIndex)" ion-button color="danger">删除</button>
+            </ion-item-options>
+          </ion-item-sliding>
+          
+        </ion-list>
+
+    </div>
+
+    <div *ngIf="!isUserLogin" text-center>
+        <img src="assets/img/404/404_img2.png"/>
+        <h3>请登录查看购物车信息</h3>
+        <button (click)="jumpToLogin()"
+         ion-button block color="secondary">
+          登录
+        </button>
+    </div>
+
+</ion-content>
+
+<ion-footer >
+  <ion-grid *ngIf="isUserLogin || cartList.length == 0">
+    <ion-row>
+      <ion-col>
+        <ion-checkbox></ion-checkbox>
+        全选 总计{{getTotalPrice()}}
+      </ion-col>
+      <ion-col col-4>
+        <button (click)="jumpToOrderConfirm()" ion-button color="danger" block>去结算</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

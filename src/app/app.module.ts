@@ -1,24 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule} from '@angular/http'
 import { MyApp } from './app.component';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
+import {HomePage} from '../pages/home/home'
+import {IndexPage} from '../pages/index/index'
+import {CartPage} from '../pages/cart/cart'
+import {UserCenterPage} from '../pages/user-center/user-center'
+import {NotFoundPage} from '../pages/not-found/not-found'
+import {DetailPage} from '../pages/detail/detail'
+import {LoginPage} from '../pages/login/login'
+import {OrderConfirmPage} from '../pages/order-confirm/order-confirm'
+import {PayPage} from '../pages/pay/pay'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {MyHttpService} 
+from './utility/service/myhttp.service'
+
 
 @NgModule({
   declarations: [
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage
+    ListPage,
+    HomePage,
+    IndexPage,
+    CartPage,
+    UserCenterPage,
+    NotFoundPage,
+    DetailPage,
+    LoginPage,
+    OrderConfirmPage,
+    PayPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -26,12 +49,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage
+    ListPage,
+    HomePage,
+    IndexPage,
+    CartPage,
+    UserCenterPage,
+    NotFoundPage,
+    DetailPage,
+    LoginPage,
+    OrderConfirmPage,
+    PayPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MyHttpService
   ]
 })
 export class AppModule {}
